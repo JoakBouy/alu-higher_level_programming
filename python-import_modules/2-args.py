@@ -11,9 +11,6 @@ def main():
         print("1 argument:\n1: {}".format(args[0]))
     else:
         print("{:d} arguments:".format(args_len))
-        for i in range(args_len):
-            print("{:d}: {}".format(i + 1, args[i]))
-
-
-            if __name__ == "__main__":
-                    main()
+    for i in range(args_len):
+        print("{:d}: {}".format(i + 1, args[i]))
+    if __name__ == "__main__":
