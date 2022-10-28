@@ -1,30 +1,20 @@
 #!/usr/bin/python3
 from calculator_1 import add, sub, mul, div
+from sys import argv, exit
 
+argc = len(argv)
 
-def main(argv):
-    args = argv[1:]
-    args_len = len(args)
-    if args_len != 3:
+if __name__ == "__main__":
+
+    if argc != 4:
         print("Usage: ./100-my_calculator.py <a> <operator> <b>")
         exit(1)
-        if args[1] != '+' and args[1] != '-' and args[1] != '*' and args[1] != '/':
-            print("Unknown operator. Available operators: +, -, * and /")
-            exit(1)
-            a = int(args[0])
-            b = int(args[2])
-            operator = args[1]
-            if operator == '+':
-                result = add(a, b)
-            elif operator == '-':
-                result = sub(a, b)
-            elif operator == '*':
-                result = mul(a, b)
-            elif operator == '/':
-                result = div(a, b)
-                print("{} {} {} = {}".format(a, operator, b, result))
 
+    operators = {"+": add, "-": sub, "*": mul, "/": div}
+    if argv[2] not in list(operators.keys()):
+        print("Unknown operator. Available operators: +, -, * and /")
+        exit(1)
 
-                if __name__ == "__main__":
-                    import sys
-                    main(sys.argv)
+    a = int(argv[1])
+    b = int(argv[3])
+    print(f"{a} {argv[2]} {b} = {operators[argv[2]](a, b)}")
