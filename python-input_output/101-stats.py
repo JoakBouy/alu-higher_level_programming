@@ -1,43 +1,39 @@
 #!/usr/bin/python3
-"""
-Take stdin and check the input, make some operation on it
-"""
+
+"""printing the status of request"""
 import sys
 
-errorCode = {
-    "200": 0,
-    "301": 0,
-    "400": 0,
-    "401": 0,
-    "403": 0,
-    "404": 0,
-    "405": 0,
-    "500": 0,
-}
-numOfLine = 0
-sumSize = 0
 
-try:
-    for line in sys.stdin:
-        lineToken = line.split()
-        if len(lineToken) >= 2:
-            tmp = numOfLine
-            if lineToken[-2] in errorCode:
-                errorCode[lineToken[-2]] += 1
-            numOfLine += 1
-            sumSize += int(lineToken[-1])
-        if numOfLine % 10 == 0:
-            print("File size: {:d}".format(sumSize))
-            for key, value in sorted(errorCode.items()):
-                if value:
-                    print("{:s}: {:d}".format(key, value))
-    print("File size: {:d}".format(sumSize))
-    for key, value in sorted(errorCode.items()):
-        if value:
-            print("{:s}: {:d}".format(key, value))
+def print_status():
+    """Printing the status of the request"""
 
-except KeyboardInterrupt:
-    print("File size: {:d}".format(sumSize))
-    for key, value in sorted(errorCode.items()):
-        if value:
-            print("{:s}: {:d}".format(key, value))
+    counter = 0
+    size = 0
+    file_size = 0
+    status_codes = {"200": 0, "301": 0, "400": 0, "401": 0,
+                    "403": 0, "404": 0, "405": 0, "500": 0}
+
+    for lines in sys.stdin:
+        line = lines.split()
+        try:
+            size += int(line[-1])
+            code = line[-2]
+            status_codes[code] += 1
+        except Exception:
+            continue
+        if counter == 9:
+            print("File size: {}".format(size))
+            for key, val in sorted(status_codes.items()):
+                if (val != 0):
+                    print("{}: {}".format(key, val))
+            counter = 0
+        counter += 1
+    if counter < 9:
+        print("File size: {}".format(size))
+        for key, val in sorted(status_codes.items()):
+            if (val != 0):
+                print("{}: {}".format(key, val))
+
+
+if __name__ == "__main__":
+    print_status()
