@@ -27,19 +27,19 @@ if __name__ == "__main__":
         for line in sys.stdin:
             if count == 10:
                 print_stats(size, status_codes)
-             count=1
+                count = 1
             else:
-                cou     nt += 1
+                count += 1
 
             line = line.split()
 
             try:
                 size += int(line[-1])
             except (IndexError, ValueError):
-        pass
+                pass
 
-           try:
-                if          line[-2] in valid_codes:
+            try:
+                if line[-2] in valid_codes:
                     if status_codes.get(line[-2], -1) == -1:
                         status_codes[line[-2]] = 1
                     else:
