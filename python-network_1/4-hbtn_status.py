@@ -1,12 +1,11 @@
 #!/usr/bin/python3
-""" module uses the request module
-    to send a request to server """
+"""Fetching a url"""
+
 import requests
 
 
 if __name__ == "__main__":
-    r = requests.get('https://intranet.hbtn.io/status')
+    response = requests.get("https://intranet.hbtn.io/status")
     print("Body response:")
-    data = r.text
-    print("\t- type: {}".format(type(data)))
-    print("\t- content: {}".format(data))
+    print("\t- type: {}".format(type(response.text)))
+    print("\t- content: {}".format(response.text))

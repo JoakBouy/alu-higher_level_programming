@@ -1,14 +1,11 @@
 #!/usr/bin/python3
-""" send a request and
-getting a particular header
-"""
+"""take an url and display the values"""
+
 import requests
 import sys
 
-
-# url = 'https://intranet.hbtn.io'
-
 if __name__ == "__main__":
-    r = requests.get(sys.argv[1])
-    dict_got = r.headers
-    print(dict_got.get('X-Request-Id'))
+    """display the contents"""
+    url = sys.argv[1]
+    response = requests.get(url)
+    print("{}".format(response.headers.get('X-Request-Id')))
