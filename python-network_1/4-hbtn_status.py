@@ -1,10 +1,12 @@
 #!/usr/bin/python3
-"""Check status"""
+""" module uses the request module
+    to send a request to server """
 import requests
 
 
 if __name__ == "__main__":
-    reply = requests.get('https://intranet.hbtn.io/status').text
+    r = requests.get('https://intranet.hbtn.io/status')
     print("Body response:")
-    print("\t- type: {}".format(type(reply)))
-    print("\t- content: {}".format(reply))
+    data = r.text
+    print("\t- type: {}".format(type(data)))
+    print("\t- content: {}".format(data))

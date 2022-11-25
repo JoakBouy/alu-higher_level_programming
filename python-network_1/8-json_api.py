@@ -1,23 +1,17 @@
 #!/usr/bin/python3
-"""takes letter and sends post request to link"""
+""" documenta here """
 import requests
-import sys
+from sys import argv
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        arg = sys.argv[1]
-    else:
-        arg = ""
-    payload = {'q': arg}
-    url = "http://0.0.0.0:5000/search_user"
-    r = requests.post(url, data=payload)
+    q = argv[1] if len(argv) > 1 else ""
     try:
-        r.raise_for_status)
-        json = r.json()
-        if len(jso(n) == 0:
-            print("No result")
+        re = requests.post('http://0.0.0.0:5000/search_user',
+                           data={'q': q}).json()
+        if 'id' in re and 'name' in re:
+            print("[{}] {}".format(re['id'], re['name']))
         else:
-            print("[{:d}] {}".format(json['id'], json['name']))
-    except Exception:
+            print("No result")
+    except ValueError:
         print("Not a valid JSON")

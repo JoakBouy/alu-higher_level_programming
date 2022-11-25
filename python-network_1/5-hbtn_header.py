@@ -1,10 +1,14 @@
 #!/usr/bin/python3
-"""Check status"""
+""" send a request and
+getting a particular header
+"""
 import requests
 import sys
 
 
+# url = 'https://intranet.hbtn.io'
+
 if __name__ == "__main__":
-    url = sys.argv[1]
-    r = requests.get(url)
-    print(r.headers.get('x-request-id'))
+    r = requests.get(sys.argv[1])
+    dict_got = r.headers
+    print(dict_got.get('X-Request-Id'))
