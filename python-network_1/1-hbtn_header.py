@@ -1,9 +1,13 @@
 #!/usr/bin/python3
-""" script that takes in a URL, sends a request to the URL and displays"""
+""" module uses another module to request to make
+request but we deal with the header sections
+"""
 import urllib.request
 import sys
 
-
+"""making request to provided url"""
 if __name__ == "__main__":
-    with urllib.request.urlopen(sys.argv[1]) as res:
-        print(res.info()['X-Request-Id'])
+    """making request to provided url"""
+    req = sys.argv[1]
+    with urllib.request.urlopen(req) as response:
+        print(response.headers.get('X-Request-Id'))
