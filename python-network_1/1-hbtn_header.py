@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 """ Sending a request to URL """
-import urllib.request
-import sys
 
 
 if __name__ = "__main__":
