@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" script that takes in a URL, sends a request to the URL and displays"""
+""" Sending a request to URL """
 import urllib.request
 import sys
 

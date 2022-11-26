@@ -1,23 +1,27 @@
 #!/usr/bin/python3
-"""takes letter and sends post request to link"""
+"""Check status"""
 import requests
 import sys
 
 
-if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        arg = sys.argv[1]
+def searchapi():
+    """status"""
+    if len(sys.argv) == 1:
+        q = ""
     else:
-        arg = ""
-    payload = {'q': arg}
-    url = "http://0.0.0.0:5000/search_user"
-    r = requests.post(url, data=payload)
+        q = sys.argv[1]
+
+    result = requests.post("http://0.0.0.0:5000/search_user", data={"q": q})
+
     try:
-        r.raise_for_status)
-        json = r.json()
-        if len(jso(n) == 0:
-            print("No result")
+        data = result.json()
+        if data:
+            print("[{}] {}".format(data["id"], data["name"]))
         else:
-            print("[{:d}] {}".format(json['id'], json['name']))
-    except Exception:
+            print("No result")
+    except:
         print("Not a valid JSON")
+
+
+if __name__ == "__main__":
+    searchapi()
