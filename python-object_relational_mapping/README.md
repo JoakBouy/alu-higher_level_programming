@@ -1,1 +1,1 @@
-Pythob object relational mapping tasks
+Python object-relational mapping tasks
