@@ -1,23 +1,21 @@
 #!/usr/bin/python3
 """
-Script that takes in name of state as argument and list
+Displays all cities of a given state from the
+states table of the database hbtn_0e_4_usa.
+Safe from SQL injections.
+Usage: ./5-filter_cities.py <mysql username> \
+                            <mysql password> \
+                            <database name> \
+                            <state name searched>
 """
-
+import sys
+import MySQLdb
 
 if __name__ == "__main__":
-    from sys import argv
-    import MySQLdb
-    db = MySQLdb.connect(user=argv[1], passwd=argv[2], db=argv[3])
-    cur = db.cursor()
-    check = (argv[4], )
-    cur.execute("SELECT * FROM cities JOIN states\
-    ON cities.state_id = states.id WHERE states.name = %s\
-    ORDER BY cities.id ASC", check)
-    lst = cur.fetchall()
-    cities = []
-    for r in lst:
-        if r[4] == check[0]:
-            cities.append(r[2])
-    print(', '.join(cities))
-    cur.close()
-    db.close()
+    db = MySQLdb.connect(user=sys.argv[1], passwd=sys.argv[2], db=sys.argv[3])
+    c = db.cursor()
+    c.execute("SELECT * FROM `cities` as `c` \
+                INNER JOIN `states` as `s` \
+                   ON `c`.`state_id` = `s`.`id` \
+                ORDER BY `c`.`id`")
+    print(", ".join([ct[2] for ct in c.fetchall() if ct[4] == sys.argv[4]]))
